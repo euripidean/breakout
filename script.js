@@ -16,7 +16,7 @@ const ballRadius = 10;
 
 // Paddle
 const paddleHeight = 10;
-const paddleWidth = 400;
+const paddleWidth = 75;
 let paddleX = (canvas.width - paddleWidth) / 2;
 
 // Bricks
@@ -38,6 +38,7 @@ for (let c = 0; c < brickColumnCount; c += 1) {
 
 // Keeping Score
 let score = 0;
+let lives = 3;
 
 // Controls
 let rightPressed = false;
@@ -122,8 +123,6 @@ function collisionDetection() {
             // eslint-disable-next-line no-alert
             alert('YOU WIN, CONGRATULATIONS!');
             document.location.reload();
-            // eslint-disable-next-line no-use-before-define
-            clearInterval(interval);
           }
         }
       }
@@ -137,12 +136,19 @@ function drawScore() {
   ctx.fillText(`Score: ${score}`, 8, 20);
 }
 
+function drawLives() {
+  ctx.font = '16px Arial';
+  ctx.fillStyle = '#0095DD';
+  ctx.fillText(`Lives: ${lives}`, canvas.width - 65, 20);
+}
+
 function draw() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   drawBricks();
   drawBall();
   drawPaddle();
   drawScore();
+  drawLives();
   collisionDetection();
   if (x + dx > canvas.width - ballRadius || x + dx < ballRadius) {
     dx = -dx;
@@ -153,11 +159,18 @@ function draw() {
     if (x > paddleX && x < paddleX + paddleWidth) {
       dy = -dy;
     } else {
-      // eslint-disable-next-line no-alert
-      alert('GAME OVER');
-      document.location.reload();
-      // eslint-disable-next-line no-use-before-define
-      clearInterval(interval);
+      lives -= 1;
+      if (!lives) {
+        // eslint-disable-next-line no-alert
+        alert('GAME OVER');
+        document.location.reload();
+      } else {
+        x = canvas.width / 2;
+        y = canvas.height - 30;
+        dx = 2;
+        dy = -2;
+        paddleX = (canvas.width - paddleWidth) / 2;
+      }
     }
   }
   x += dx;
@@ -174,6 +187,7 @@ function draw() {
       paddleX = 0;
     }
   }
+  requestAnimationFrame(draw);
 }
 
-const interval = setInterval(draw, 10);
+draw();
