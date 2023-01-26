@@ -1,11 +1,12 @@
-class Ball {
-  constructor(radius, color, x, y, dx, dy) {
+// eslint-disable-next-line import/extensions
+import Sprite from './Sprite.js';
+
+class Ball extends Sprite {
+  constructor(x, y, radius, color) {
+    super(x, y, radius * 2, radius * 2, color);
     this.radius = radius;
-    this.color = color;
-    this.x = x;
-    this.y = y;
-    this.dx = dx;
-    this.dy = dy;
+    this.dx = 2;
+    this.dy = -2;
   }
 
   render(ctx) {
@@ -14,10 +15,6 @@ class Ball {
     ctx.fillStyle = this.color;
     ctx.fill();
     ctx.closePath();
-  }
-
-  move() {
-   // Move method goes here
   }
 }
 

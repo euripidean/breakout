@@ -10,7 +10,9 @@
     <script type="module">
 
         import Background from './Components/Background.js';
+        import Sprite from './Components/Sprite.js';
         import Ball from './Components/Ball.js';
+        import Bricks from './Components/Bricks.js';
         import Brick from './Components/Brick.js';
         import Paddle from './Components/Paddle.js';
         import Score from './Components/Score.js';
@@ -20,15 +22,15 @@
 
         let x = canvas.width / 2;
         let y = canvas.height - 30;
-        let dx = 2;
-        let dy = -2;
 
         const background = new Background('#EEE', 0, 20, canvas.width, canvas.height);
         background.render(ctx);
-        const ball = new Ball(10, 'red', x, y, dx, dy);
-        ball.render(ctx);
-        const bricks = new Brick(20, 0, 'limegreen', 75, 20);
+        const brick = new Brick();
+        const bricks = new Bricks();
+        bricks.setup();
         bricks.render(ctx);
+        const ball = new Ball(x, y, 10, 'gold');
+        ball.render(ctx);
         const paddle = new Paddle('black',75,10);
         paddle.render(ctx,canvas);
         const score = new Score(800,60,'#000',150, '32px Helvetica');
