@@ -9,13 +9,12 @@
     <canvas id="myCanvas" width="1000px" height="800px"></canvas>
     <script type="module">
 
-        import Background from './Components/Background.js';
         import Sprite from './Components/Sprite.js';
         import Ball from './Components/Ball.js';
         import Bricks from './Components/Bricks.js';
         import Brick from './Components/Brick.js';
         import Paddle from './Components/Paddle.js';
-        import Score from './Components/Score.js';
+        import GameLabel from './Components/GameLabel.js';
 
         const canvas = document.getElementById('myCanvas');
         const ctx = canvas.getContext('2d');
@@ -23,7 +22,7 @@
         let x = canvas.width / 2;
         let y = canvas.height - 30;
 
-        const background = new Background('#EEE', 0, 20, canvas.width, canvas.height);
+        const background = new Sprite(0, 20, canvas.width, canvas.height, '#EEE');
         background.render(ctx);
         const brick = new Brick();
         const bricks = new Bricks();
@@ -33,9 +32,10 @@
         ball.render(ctx);
         const paddle = new Paddle('black',75,10);
         paddle.render(ctx,canvas);
-        const score = new Score(800,60,'#000',150, '32px Helvetica');
-        score.render(ctx);
-
+        const scoreLabel = new GameLabel (800, 60, '#000', 'Score', 0);
+        scoreLabel.render(ctx);
+        const livesLabel = new GameLabel (50, 60, 'red', 'Lives', 3);
+        livesLabel.render(ctx);
     </script>
   </body>
 </html>
