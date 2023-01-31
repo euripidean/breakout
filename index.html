@@ -1,4 +1,4 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en-US">
   <head>
     <meta charset="utf-8" />
@@ -6,7 +6,18 @@
     <link rel="stylesheet" href="./styles.css">
   </head>
   <body>
-    <canvas id="myCanvas" width="480" height="320"></canvas>
-    <script src="./script.js" type="module"></script>
+    <div id="start-screen" class="screen" style="display:block">
+      <h1>Welcome to Breakout!</h1>
+      <button id="start"> Start Game</button>
+    </div>
+    <canvas id="myCanvas" width="1000px" height="800px" style="display:none"></canvas>
+    <div id ="win-screen" class="screen" style="display:none">
+      <h1>Congratulations! You Won!</h1>
+    </div>
+    <div id ="gameover" class="screen" style="display:none">
+      <h1>Game Over</h1>
+      <p>Better luck next time.</p>
+    </div>
   </body>
-</html> -->
+  <script src="./app.js" type="module"></script>
+</html>

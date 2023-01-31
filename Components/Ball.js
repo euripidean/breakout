@@ -5,8 +5,13 @@ class Ball extends Sprite {
   constructor(x, y, radius, color) {
     super(x, y, radius * 2, radius * 2, color);
     this.radius = radius;
-    this.dx = 2;
-    this.dy = -2;
+    this.dx = 4;
+    this.dy = -4;
+  }
+
+  moveTo() {
+    this.x += this.dx;
+    this.y += this.dy;
   }
 
   render(ctx) {

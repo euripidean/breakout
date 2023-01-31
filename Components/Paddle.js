@@ -1,17 +1,17 @@
-class Paddle {
-  constructor(color, width, height) {
-    this.color = color;
-    this.width = width;
-    this.height = height;
+// eslint-disable-next-line import/extensions
+import Sprite from './Sprite.js';
+
+class Paddle extends Sprite {
+  constructor(x, y, color, width = 75, height = 10) {
+    super(x, y, width, height, color);
   }
 
-  render(ctx, canvas) {
-    const paddleX = (canvas.width - this.width) / 2;
-    ctx.beginPath();
-    ctx.rect(paddleX, canvas.height - this.height, this.width, this.height);
-    ctx.fillStyle = this.color;
-    ctx.fill();
-    ctx.closePath();
+  moveTo(x) {
+    this.x = x;
+  }
+
+  moveBy(dx) {
+    this.x += dx;
   }
 }
 
