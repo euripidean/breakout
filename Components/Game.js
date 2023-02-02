@@ -25,19 +25,15 @@ class Game {
     // Game State
     this.rightPressed = false;
     this.leftPressed = false;
-    this.replay = false;
     // Functions
     this.setupListeners();
     this.drawAll();
   }
 
   setupListeners() {
-    // eslint-disable-next-line no-console
     const { addEventListener } = document;
-    // event listeners to listen for pressed keys
     addEventListener('keydown', this.keyDownHandler.bind(this), false);
     addEventListener('keyup', this.keyUpHandler.bind(this), false);
-    // event listener for mouse
     addEventListener('mousemove', this.mouseMoveHandler.bind(this), false);
   }
 
@@ -87,9 +83,7 @@ class Game {
             this.score.value += 1;
             this.ball.color = darkColor();
             if (this.score.value === this.brickDisplay.rows * this.brickDisplay.cols) {
-              // eslint-disable-next-line no-alert
-              alert('YOU WIN, CONGRATULATIONS!');
-              document.location.reload();
+              this.win();
             }
           }
         }
@@ -115,7 +109,6 @@ class Game {
     }
   }
 
-  // when stopped being pressed
   keyUpHandler({ key }) {
     if (key === 'Right' || key === 'ArrowRight') {
       this.rightPressed = false;
@@ -124,9 +117,8 @@ class Game {
     }
   }
 
-  // update the paddle position based on the pointer coordinates
   mouseMoveHandler({ clientX }) {
-  // restricting the movement to the size of the Canvas
+  // restricts to the size of the Canvas
     const relativeX = clientX - this.canvas.offsetLeft;
     if (relativeX > 0 && relativeX < this.canvas.width) {
       this.paddle.moveTo(relativeX - this.paddle.width / 2);
@@ -164,7 +156,6 @@ class Game {
         this.ball.dx = 4;
         this.ball.dy = -4; // reset ball speed to original
         if (this.lives.value === -1) {
-          // eslint-disable-next-line no-alert
           this.stop();
         } else {
           // reset to starting position and paddle
