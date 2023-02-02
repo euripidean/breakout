@@ -4,8 +4,8 @@ import Ball from './Ball.js';
 import BrickDisplay from './Bricks.js';
 import Paddle from './Paddle.js';
 import GameLabel from './GameLabel.js';
-import darkColor from '../Functions/DarkColor.js';
-import lightColor from '../Functions/lightColor.js';
+import darkColor from './DarkColor.js';
+import lightColor from './lightColor.js';
 
 class Game {
   constructor(canvas, ctx) {

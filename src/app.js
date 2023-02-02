@@ -1,5 +1,5 @@
 /* eslint-disable import/extensions */
-import Game from './src/Game.js'
+import Game from './Game.js';
 
 // Build Canvas
 const canvas = document.getElementById('myCanvas');
