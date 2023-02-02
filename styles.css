@@ -25,6 +25,8 @@ h1 {
 p {
   color: #FFF;
   font-family: 'Helvetica', sans-serif;
+  font-size: 24px;
+  margin-top: 20px;
 }
 
 button {
