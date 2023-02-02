@@ -1,22 +1,36 @@
-/* eslint-disable import/extensions */
-import Sprite from './Sprite.js';
-import Ball from './Ball.js';
-import BrickDisplay from './Bricks.js';
-import Paddle from './Paddle.js';
-import GameLabel from './GameLabel.js';
-import darkColor from './DarkColor.js';
-import lightColor from './lightColor.js';
+import Sprite from './Sprite';
+import Ball from './Ball';
+import BrickDisplay from './Bricks';
+import Paddle from './Paddle';
+import GameLabel from './GameLabel';
+import darkColor from './DarkColor';
+import lightColor from './lightColor';
 
 class Game {
-  constructor(canvas, ctx) {
+  canvas: HTMLCanvasElement;
+  ctx: any;
+  x: number;
+  y: number;
+  paddleWidth: number;
+  paddleX: number;
+  background: Sprite;
+  brickDisplay: BrickDisplay;
+  ball: Ball;
+  paddle: Paddle;
+  score: GameLabel;
+  lives: GameLabel;
+  rightPressed: Boolean;
+  leftPressed: Boolean;
+
+  constructor(canvas: HTMLCanvasElement, ctx: any) {
     this.canvas = canvas;
     this.ctx = ctx;
     this.x = canvas.width / 2;
     this.y = canvas.height - 30;
-    this.paddleWidth = 300;
+    this.paddleWidth = 75;
     this.paddleX = (canvas.width - this.paddleWidth) / 2;
     // Game Elements
-    this.background = new Sprite(0, 0, canvas.width, canvas.height, lightColor());
+    this.background = new Sprite(0, 0, lightColor(), canvas.width, canvas.height);
     this.brickDisplay = new BrickDisplay(darkColor());
     this.ball = new Ball(this.x, this.y, 10, darkColor());
     this.paddle = new Paddle(this.paddleX, this.canvas.height - 10, darkColor());
@@ -38,30 +52,30 @@ class Game {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  toggleScreen(id, toggle) {
+  toggleScreen(id: string, toggle: Boolean): void {
     const element = document.getElementById(id);
     const display = (toggle) ? 'block' : 'none';
     element.style.display = display;
   }
 
-  stop() {
+  stop(): void {
     this.toggleScreen('myCanvas', false);
     this.toggleScreen('gameover', true);
   }
 
-  start() {
+  start(): void {
     this.toggleScreen('start-screen', false);
     this.toggleScreen('gameover', false);
     this.toggleScreen('win-screen', false);
     this.toggleScreen('myCanvas', true);
   }
 
-  win() {
+  win(): void {
     this.toggleScreen('myCanvas', false);
     this.toggleScreen('win-screen', true);
   }
 
-  collisionDetection() {
+  collisionDetection(): void {
     for (let c = 0; c < this.brickDisplay.cols; c += 1) {
       for (let r = 0; r < this.brickDisplay.rows; r += 1) {
         const b = this.brickDisplay.bricks[c][r];
@@ -85,7 +99,7 @@ class Game {
     }
   }
 
-  movePaddle() {
+  movePaddle(): void {
     if (this.rightPressed && this.paddle.x < this.canvas.width - this.paddle.width) {
       // right hand side limit
       this.paddle.moveBy(7);
@@ -95,7 +109,7 @@ class Game {
     }
   }
 
-  keyDownHandler({ key }) {
+  keyDownHandler({ key }: KeyboardEvent) {
     if (key === 'Right' || key === 'ArrowRight') {
       this.rightPressed = true;
     } else if (key === 'Left' || key === 'ArrowLeft') {
@@ -103,7 +117,7 @@ class Game {
     }
   }
 
-  keyUpHandler({ key }) {
+  keyUpHandler({ key }: KeyboardEvent) {
     if (key === 'Right' || key === 'ArrowRight') {
       this.rightPressed = false;
     } else if (key === 'Left' || key === 'ArrowLeft') {
@@ -111,7 +125,7 @@ class Game {
     }
   }
 
-  mouseMoveHandler({ clientX }) {
+  mouseMoveHandler({ clientX }: MouseEvent) {
   // restricts to the size of the Canvas
     const relativeX = clientX - this.canvas.offsetLeft;
     if (relativeX > 0 && relativeX < this.canvas.width) {
@@ -119,7 +133,7 @@ class Game {
     }
   }
 
-  drawAll() {
+  drawAll(): void {
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     // Render all elements
     this.background.render(this.ctx);

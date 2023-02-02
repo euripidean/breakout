@@ -1,5 +1,10 @@
 class Sprite {
-  constructor(x, y, width, height, color) {
+  x: number;
+  y: number;
+  width?: number;
+  height?: number;
+  color?: string;
+  constructor(x: number, y: number, color?: string, width?: number, height?: number) {
     this.x = x;
     this.y = y;
     this.width = width;
@@ -7,17 +12,17 @@ class Sprite {
     this.color = color;
   }
 
-  moveTo(x, y) {
+  moveTo(x: number, y: number): void {
     this.x = x;
     this.y = y;
   }
 
-  moveBy(dx, dy) {
+  moveBy(dx: number, dy: number): void {
     this.x += dx;
     this.y += dy;
   }
 
-  render(ctx) {
+  render(ctx: any) {
     ctx.beginPath();
     ctx.rect(this.x, this.y, this.width, this.height);
     ctx.fillStyle = this.color;

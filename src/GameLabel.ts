@@ -1,8 +1,14 @@
-// eslint-disable-next-line import/extensions
-import Sprite from './Sprite.js';
+import Sprite from './Sprite';
 
 class GameLabel extends Sprite {
-  constructor(x, y, color, text, value, font = '32px Helvetica', align = 'left') {
+  x: number;
+  y: number;
+  color: string;
+  text: string;
+  value: number;
+  font: string;
+  align: string;
+  constructor(x: number, y: number, color: string, text: string, value: number, font = '32px Helvetica', align = 'left') {
     super(x, y, color);
     this.text = text;
     this.value = value;
@@ -10,7 +16,7 @@ class GameLabel extends Sprite {
     this.align = align;
   }
 
-  render(ctx) {
+  render(ctx: any) {
     ctx.font = this.font;
     ctx.fillStyle = this.color;
     ctx.fillText(`${this.text}: ${this.value}`, this.x, this.y);

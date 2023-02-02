@@ -1,8 +1,16 @@
-// eslint-disable-next-line import/extensions
-import Brick from './Brick.js';
+import Brick from './Brick';
 
 class BrickDisplay {
-  constructor(colorTheme, rows = 8, cols = 11) {
+  colorTheme: string;
+  rows: number;
+  cols: number;
+  bricks: Array<any>;
+  brickWidth: number;
+  brickHeight: number;
+  brickPadding: number;
+  brickOffset: number;
+  brickTop: number;
+  constructor(colorTheme: string, rows = 8, cols = 11) {
     this.colorTheme = colorTheme;
     this.rows = rows;
     this.cols = cols;
@@ -25,7 +33,7 @@ class BrickDisplay {
     }
   }
 
-  render(ctx) {
+  render(ctx: any) {
     for (let c = 0; c < this.cols; c += 1) {
       for (let r = 0; r < this.rows; r += 1) {
         if (this.bricks[c][r].status === 1) {
