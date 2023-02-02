@@ -13,7 +13,7 @@ class Game {
     this.ctx = ctx;
     this.x = canvas.width / 2;
     this.y = canvas.height - 30;
-    this.paddleWidth = 75;
+    this.paddleWidth = 300;
     this.paddleX = (canvas.width - this.paddleWidth) / 2;
     // Game Elements
     this.background = new Sprite(0, 0, canvas.width, canvas.height, lightColor());
@@ -47,9 +47,6 @@ class Game {
   stop() {
     this.toggleScreen('myCanvas', false);
     this.toggleScreen('gameover', true);
-    setTimeout(() => {
-      document.location.reload();
-    }, 3000);
   }
 
   start() {
@@ -62,9 +59,6 @@ class Game {
   win() {
     this.toggleScreen('myCanvas', false);
     this.toggleScreen('win-screen', true);
-    setTimeout(() => {
-      document.location.reload();
-    }, 3000);
   }
 
   collisionDetection() {

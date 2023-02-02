@@ -5,11 +5,13 @@ import Game from './Components/Game.js';
 const canvas = document.getElementById('myCanvas');
 const ctx = canvas.getContext('2d');
 
-// eslint-disable-next-line no-unused-vars
 function startGame() {
   const game = new Game(canvas, ctx);
   game.start();
 }
 
-const startButton = document.getElementById('start');
-startButton.addEventListener('click', startGame, false);
+document.body.addEventListener('click', (e) => {
+  if (e.target.matches('#start') || e.target.matches('#playAgain') || e.target.matches('#winPlayAgain')) {
+    startGame();
+  }
+}, false);
